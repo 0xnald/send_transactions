@@ -1,7 +1,5 @@
-const { ethers } = require('ethers');
-
-// Import the `inquirer` library for user input
-const inquirer = require('inquirer');
+const ethers = require('ethers');
+const inquirer = require('inquirer').default;
 
 // Function to get user input
 async function getUserInput() {
