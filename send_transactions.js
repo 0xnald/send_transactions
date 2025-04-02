@@ -1,4 +1,5 @@
 const ethers = require('ethers');
+const { utils } = require('ethers');
 const inquirer = require('inquirer').default;
 
 // Function to get user input
@@ -78,13 +79,13 @@ async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients)
       for (let recipient of recipients) {
         const tx = await wallet.sendTransaction({
           to: recipient,
-          value: ethers.utils.parseUnits(amounts[i].toString(), 18) // assuming 18 decimal places for TEA token
+          value: utils.parseUnits(amounts[i % amounts.length].toString(), 18) // assuming 18 decimal places for TEA token
         });
 
-        console.log(`Sent ${amounts[i]} TEA to ${recipient}. Tx Hash: ${tx.hash}`);
+        console.log(`Sent ${amounts[i % amounts.length]} TEA to ${recipient}. Tx Hash: ${tx.hash}`);
 
         // Wait for the transaction to be mined at the specified interval
-        await new Promise(resolve => setTimeout(resolve, intervals[i] * 1000));
+        await new Promise(resolve => setTimeout(resolve, intervals[i % intervals.length] * 1000));
 
         // Wait for the transaction to be mined
         await tx.wait();
