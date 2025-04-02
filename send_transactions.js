@@ -74,6 +74,7 @@ async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients)
     const intervals = [10, 30, 20, 15];
 
     // Send transactions
+    let transactionCount = 0; // Initialize transaction count
     for (let i = 0; i < numTransactions; i++) {
       for (let recipient of recipients) {
         const tx = await wallet.sendTransaction({
@@ -81,13 +82,15 @@ async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients)
           value: ethers.parseUnits(amounts[i % amounts.length].toString(), 18) // Updated for ethers.js v6
         });
 
-        console.log(`Sent ${amounts[i % amounts.length]} TEA to ${recipient}. Tx Hash: ${tx.hash}`);
+        transactionCount++; // Increment transaction count
+        console.log(`Transaction ${transactionCount}: Sent ${amounts[i % amounts.length]} TEA to ${recipient}. Tx Hash: ${tx.hash}`);
 
         // Wait for the transaction to be mined at the specified interval
         await new Promise(resolve => setTimeout(resolve, intervals[i % intervals.length] * 1000));
 
         // Wait for the transaction to be mined
         await tx.wait();
+        console.log(`Transaction ${transactionCount} confirmed.`);
       }
     }
 
