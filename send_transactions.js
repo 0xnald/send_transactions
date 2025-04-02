@@ -78,7 +78,7 @@ async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients)
       for (let recipient of recipients) {
         const tx = await wallet.sendTransaction({
           to: recipient,
-          value: ethers.utils.parseUnits(amounts[i % amounts.length].toString(), 18) // assuming 18 decimal places for TEA token
+          value: ethers.parseUnits(amounts[i % amounts.length].toString(), 18) // Updated for ethers.js v6
         });
 
         console.log(`Sent ${amounts[i % amounts.length]} TEA to ${recipient}. Tx Hash: ${tx.hash}`);
