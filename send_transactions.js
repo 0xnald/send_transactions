@@ -1,6 +1,5 @@
-const ethers = require('ethers');
-const utils = ethers.utils;
-const inquirer = require('inquirer').default;
+const { ethers } = require('ethers'); // Import ethers
+const inquirer = require('inquirer').default; // Import inquirer for user input
 
 // Function to get user input
 async function getUserInput() {
@@ -65,7 +64,7 @@ async function getUserInput() {
 async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients) {
   try {
     // Create a provider instance
-    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    const provider = new ethers.JsonRpcProvider(rpcUrl); // Updated for ethers.js v6
 
     // Create a wallet instance
     const wallet = new ethers.Wallet(privateKey, provider);
