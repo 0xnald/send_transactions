@@ -64,7 +64,7 @@ async function getUserInput() {
 async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients) {
   try {
     // Create a provider instance
-    const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+    const provider = ethers.getDefaultProvider(rpcUrl);
 
     // Create a wallet instance
     const wallet = new ethers.Wallet(privateKey, provider);
