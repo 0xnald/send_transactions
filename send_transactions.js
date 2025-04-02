@@ -28,31 +28,31 @@ async function getUserInput() {
       default: 4 // assuming 4 transactions
     });
 
-    // Prompt the user for number of recipients
-    const numRecipients = await inquirer.prompt({
-      type: 'number',
-      name: 'numRecipients',
-      message: 'Enter number of recipients:',
-      default: 1
+    // Prompt the user to add recipient addresses
+    const recipient1 = await inquirer.prompt({
+      type: 'input',
+      name: 'recipient1',
+      message: 'Enter recipient address 1:'
     });
 
-    // Prompt the user to add recipient addresses
-    const recipients = [];
-    for (let i = 0; i < numRecipients; i++) {
-      const recipient = await inquirer.prompt({
-        type: 'input',
-        name: 'recipient',
-        message: `Enter recipient address ${i + 1}:`
-      });
-      recipients.push(recipient.recipient);
-    }
+    const recipient2 = await inquirer.prompt({
+      type: 'input',
+      name: 'recipient2',
+      message: 'Enter recipient address 2:'
+    });
+
+    const recipient3 = await inquirer.prompt({
+      type: 'input',
+      name: 'recipient3',
+      message: 'Enter recipient address 3:'
+    });
 
     // Return the user input
     return {
       rpcUrl: rpcUrl.rpcUrl,
       privateKey: privateKey.privateKey,
       numTransactions: numTransactions.numTransactions,
-      recipients: recipients
+      recipients: [recipient1.recipient1, recipient2.recipient2, recipient3.recipient3]
     };
   } catch (error) {
     console.error('Error getting user input:', error);
