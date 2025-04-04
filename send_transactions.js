@@ -70,8 +70,8 @@ async function sendTransactions(rpcUrl, privateKey, numTransactions, recipients)
     const wallet = new ethers.Wallet(privateKey, provider);
 
     // Define the transaction amounts and intervals
-    const amounts = [0.021, 0.01051, 0.01014, 0.01111];
-    const intervals = [10, 09, 06, 11];
+    const amounts = [0.0121, 0.015, 0.013, 0.011];
+    const intervals = [11, 08, 07, 12];
 
     // Send transactions
     let transactionCount = 0; // Initialize transaction count
